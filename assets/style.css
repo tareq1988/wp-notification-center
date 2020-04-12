@@ -7,6 +7,13 @@
     position: relative;
 }
 
+#wpadminbar #wp-admin-bar-wd-notify-center .ab-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: rgba(240, 245, 250, 0.6);
+    margin-top: 3px;
+}
+
 #wpadminbar #wp-admin-bar-wd-notify-center .ab-icon.has-alert:before {
     content: ' ';
     position: absolute;

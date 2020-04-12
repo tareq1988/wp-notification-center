@@ -11,8 +11,16 @@ use WP_Error;
  */
 class API extends WP_REST_Controller {
 
+    /**
+     * Schema
+     *
+     * @var array
+     */
     protected $schema;
 
+    /**
+     * Constructor
+     */
     function __construct() {
         $this->namespace = 'wd-notifications/v1';
         $this->rest_base = 'notifications';
@@ -20,6 +28,11 @@ class API extends WP_REST_Controller {
         add_action( 'rest_api_init', [ $this, 'register_routes' ] );
     }
 
+    /**
+     * Register REST Routes
+     *
+     * @return void
+     */
     public function register_routes() {
         register_rest_route(
             $this->namespace,
@@ -240,9 +253,7 @@ class API extends WP_REST_Controller {
     /**
      * Retrieves the query params for collections.
      *
-     * @since 4.7.0
-     *
-     * @return array Comments collection parameters.
+     * @return array
      */
     public function get_collection_params() {
         $query_params = parent::get_collection_params();
@@ -266,9 +277,9 @@ class API extends WP_REST_Controller {
     /**
      * Updates a single notification status.
      *
-     * @param WP_REST_Request $request Full details about the request.
+     * @param WP_REST_Request $request
      *
-     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     * @return WP_REST_Response|WP_Error
      */
     public function update_item( $request ) {
         wd_notify_change_notification_status( $request['id'], $request['status'] );
@@ -282,9 +293,9 @@ class API extends WP_REST_Controller {
     /**
      * Updates all notifications status to read.
      *
-     * @param WP_REST_Request $request Full details about the request.
+     * @param WP_REST_Request $request
      *
-     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     * @return WP_REST_Response|WP_Error
      */
     public function mark_all_read( $request ) {
         wd_notify_mark_all_read();
@@ -297,9 +308,9 @@ class API extends WP_REST_Controller {
     /**
      * Dismiss the bell notifications.
      *
-     * @param WP_REST_Request $request Full details about the request.
+     * @param WP_REST_Request $request
      *
-     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     * @return WP_REST_Response|WP_Error
      */
     public function dismiss_bell( $request ) {
         update_user_meta( get_current_user_id(), '_wd_notify_alert', false );
@@ -320,20 +331,19 @@ class API extends WP_REST_Controller {
         }
 
         $schema = [
-            // This tells the spec of JSON Schema we are using which is draft 4.
-            '$schema'              => 'http://json-schema.org/draft-04/schema#',
-            'title'                => 'notification',
-            'type'                 => 'object',
-            'properties'           => [
+            '$schema'    => 'http://json-schema.org/draft-04/schema#',
+            'title'      => 'notification',
+            'type'       => 'object',
+            'properties' => [
                 'id' => [
-                    'description'  => esc_html__( 'Unique identifier for the object.', 'my-textdomain' ),
-                    'type'         => 'integer',
-                    'context'      => [ 'view', 'edit' ],
-                    'readonly'     => true,
+                    'description' => esc_html__( 'Unique identifier for the object.', 'my-textdomain' ),
+                    'type'        => 'integer',
+                    'context'     => [ 'view', 'edit' ],
+                    'readonly'    => true,
                 ],
                 'content' => [
-                    'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
-                    'type'         => 'string',
+                    'description' => esc_html__( 'The content for the object.', 'my-textdomain' ),
+                    'type'        => 'string',
                     'context'     => [ 'view', 'edit' ],
                 ],
                 'link' => [

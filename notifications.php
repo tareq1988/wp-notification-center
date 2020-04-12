@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Notifications by weDevs
- * Description: A notification center plugin
- * Plugin URI: https://tareq.co
+ * Plugin Name: Notification Center
+ * Description: Notification center plugin for WordPress
+ * Plugin URI: https://wedevs.com
  * Author: Tareq Hasan
  * Author URI: https://tareq.co
  * Version: 1.0
@@ -26,7 +26,7 @@ final class WeDevs_Notification {
      *
      * @var string
      */
-    const version = '1.0';
+    const VERSION = '1.0';
 
     /**
      * Class construcotr
@@ -60,7 +60,7 @@ final class WeDevs_Notification {
      * @return void
      */
     public function define_constants() {
-        define( 'WD_NOTIF_VERSION', self::version );
+        define( 'WD_NOTIF_VERSION', self::VERSION );
         define( 'WD_NOTIF_FILE', __FILE__ );
         define( 'WD_NOTIF_PATH', __DIR__ );
         define( 'WD_NOTIF_URL', plugins_url( '', WD_NOTIF_FILE ) );
@@ -80,7 +80,6 @@ final class WeDevs_Notification {
         if ( is_admin() ) {
             new WeDevs\Notification\Admin();
         }
-
     }
 
     /**

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Create the notify object
+ *
+ * @return WeDevs\Notification\Notify
+ */
 function wd_notify() {
     $backtrace = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, 3 );
 
@@ -8,12 +13,17 @@ function wd_notify() {
     }
 
     $slug = wd_notify_get_caller_slug( $backtrace );
-    return new WeDevs\Notification\Notify( $slug );
-    $notification = $notification->origin( $slug );
 
-    $notification;
+    return new WeDevs\Notification\Notify( $slug );
 }
 
+/**
+ * If the notification was invoked from a plugin
+ *
+ * @param  array $backtrace
+ *
+ * @return boolean
+ */
 function wd_notify_from_plugin( $backtrace ) {
     // if caller file is in the plugin dir
     $boolean = substr( $backtrace[0]['file'], 0, strlen( WP_PLUGIN_DIR ) ) === WP_PLUGIN_DIR;
@@ -21,6 +31,13 @@ function wd_notify_from_plugin( $backtrace ) {
     return $boolean;
 }
 
+/**
+ * Get the caller plugin directory name
+ *
+ * @param  array $backtrace
+ *
+ * @return string | false
+ */
 function wd_notify_get_caller_slug( $backtrace ) {
     $trail = str_replace( WP_PLUGIN_DIR . '/', '', $backtrace[0]['file'] );
     $parts = explode( '/', $trail );
@@ -28,6 +45,13 @@ function wd_notify_get_caller_slug( $backtrace ) {
     return isset( $parts[0] ) ? $parts[0] : false;
 }
 
+/**
+ * Fetch notifications
+ *
+ * @param  array  $args
+ *
+ * @return array
+ */
 function wd_notify_get_notifications( $args = [] ) {
     global $wpdb;
 
@@ -55,7 +79,7 @@ function wd_notify_get_notifications( $args = [] ) {
 }
 
 /**
- * Get the count of total address
+ * Get the count of total notifications of a user
  *
  * @return int
  */
@@ -87,7 +111,7 @@ function wd_notify_get_notification( $notification_id ) {
 }
 
 /**
- * Get a single notification
+ * Set a single notification read/unread status
  *
  * @param  int $notification_id
  *

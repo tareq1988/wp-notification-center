@@ -5,25 +5,87 @@ namespace WeDevs\Notification;
 use Exception;
 
 /**
- * Frontend
+ * Notify Class
  */
 class Notify {
 
+    /**
+     * Max length for notification message
+     */
     const LENGTH = 250;
 
+    /**
+     * Notification body
+     *
+     * @var string
+     */
     protected $body = '';
+
+    /**
+     * Notification link
+     *
+     * @var string
+     */
     protected $link = '';
+
+    /**
+     * Notification read status
+     *
+     * @var integer
+     */
     protected $read = 0;
+
+    /**
+     * Notification type
+     *
+     * @var string
+     */
     protected $type = 'USER';
+
+    /**
+     * Notification to user
+     *
+     * @var integer
+     */
     protected $to;
+
+    /**
+     * Notification sent by
+     *
+     * @var integer|string
+     */
     protected $sent_by;
+
+    /**
+     * Notification Icon.
+     *
+     * @var string
+     */
     protected $icon = '';
+
+    /**
+     * Notification origin plugin
+     *
+     * @var string
+     */
     protected $origin = '';
 
+    /**
+     * Constructor
+     *
+     * @param void $origin
+     */
     function __construct( $origin ) {
         $this->origin = $origin;
     }
 
+    /**
+     * Set Notification body
+     *
+     * @param  string $content
+     *
+     * @return WeDevs\Notification\Notify
+     */
     public function body( $content ) {
         $content = trim( $content );
 
@@ -44,6 +106,13 @@ class Notify {
         return $this;
     }
 
+    /**
+     * From plugin
+     *
+     * @param  string $basename
+     *
+     * @return WeDevs\Notification\Notify
+     */
     public function from_plugin( $basename ) {
         $this->type = 'PLUGIN';
 
@@ -60,16 +129,26 @@ class Notify {
         return $this;
     }
 
+    /**
+     * Set link
+     *
+     * @param  string $link
+     *
+     * @return WeDevs\Notification\Notify
+     */
     public function link( $link ) {
         $this->link = $link;
 
         return $this;
     }
 
-    public function mark_read() {
-        $this->read = 1;
-    }
-
+    /**
+     * Set from user
+     *
+     * @param  integer $user_id
+     *
+     * @return WeDevs\Notification\Notify
+     */
     public function from_user( $user_id ) {
         $this->sent_by = (int) $user_id;
         $this->type = 'USER';
@@ -83,12 +162,24 @@ class Notify {
         return $this;
     }
 
+    /**
+     * Notification sent to user id
+     *
+     * @param  integer $user_id
+     *
+     * @return WeDevs\Notification\Notify
+     */
     public function to( $user_id ) {
         $this->to = (int) $user_id;
 
         return $this;
     }
 
+    /**
+     * Send the notification
+     *
+     * @return integer
+     */
     public function send() {
         global $wpdb;
 
