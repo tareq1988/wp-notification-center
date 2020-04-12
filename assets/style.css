@@ -1,0 +1,238 @@
+#wpadminbar #wp-admin-bar-wd-notify-center,
+#wpadminbar #wp-admin-bar-wd-notify-center span {
+    cursor: pointer;
+}
+
+#wpadminbar #wp-admin-bar-wd-notify-center .ab-item {
+    position: relative;
+}
+
+#wpadminbar #wp-admin-bar-wd-notify-center .ab-icon.has-alert:before {
+    content: ' ';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 8px;
+    right: -5px;
+    background: #f5222d;
+    border-radius: 100%;
+}
+
+.wd-drawer > * {
+    transition: transform .3s cubic-bezier(.7,.3,.1,1),box-shadow .3s cubic-bezier(.7,.3,.1,1);
+}
+
+.wd-drawer {
+    position: fixed;
+    z-index: 1000;
+    width: 0;
+    height: 100%;
+    transition: transform .3s cubic-bezier(.7,.3,.1,1),height 0s ease .3s,width 0s ease .3s;
+}
+
+.wd-drawer-left,
+.wd-drawer-right {
+    top: 0;
+    width: 0;
+    height: 100%;
+}
+
+.wd-drawer-right,
+.wd-drawer-right .wd-drawer-content-wrapper {
+    right: 0;
+}
+
+.wd-drawer-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(0,0,0,.45);
+    opacity: 0;
+    filter: alpha(opacity=45);
+    transition: opacity .3s linear,height 0s ease .3s;
+}
+
+.wd-drawer > * {
+    transition: transform .3s cubic-bezier(.7,.3,.1,1),box-shadow .3s cubic-bezier(.7,.3,.1,1);
+}
+
+.wd-drawer-right,
+.wd-drawer-right .wd-drawer-content-wrapper {
+    right: 0;
+}
+
+.wd-drawer-left .wd-drawer-content-wrapper,
+.wd-drawer-right .wd-drawer-content-wrapper {
+    height: 100vh;
+    margin-top: 32px;
+}
+
+.wd-drawer-left.wd-drawer-open,
+.wd-drawer-right.wd-drawer-open {
+    width: 100%;
+    transition: transform .3s cubic-bezier(.7,.3,.1,1);
+}
+
+.wd-drawer-content-wrapper {
+    position: absolute;
+}
+
+.wd-drawer .wd-drawer-content {
+    width: 100%;
+    height: 100%;
+}
+
+.wd-drawer-content {
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0;
+}
+
+.wd-drawer-wrapper-body {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+}
+
+.wd-drawer-header,
+.wd-drawer-header-no-title {
+    color: rgba(0,0,0,.65);
+    background: #fff;
+}
+
+.wd-drawer-header {
+    position: fixed;
+    width: 310px;
+    display: flex;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 4px 4px 0 0;
+}
+
+.wd-drawer-title {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.wd-drawer-title a.fetching span {
+    animation: rotation 2s infinite linear;
+}
+
+.wd-drawer-title a {
+    margin-left: 3px;
+    font-size: 1em;
+}
+
+.wd-drawer-read {
+    flex-grow: 0;
+    margin-top: 3px;
+}
+
+.wd-drawer-title a,
+.wd-drawer-read a {
+    text-decoration: none;
+}
+
+.wd-drawer-body {
+    padding: 5px 0 35px 0;
+    /*font-size: 14px;*/
+    line-height: 1.5;
+    word-wrap: break-word;
+    margin-top: 45px;
+    flex-grow: 1;
+}
+
+.wd-drawer-title {
+    margin: 0;
+    color: rgba(0,0,0,.85);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.wd-drawer-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(0,0,0,.45);
+    opacity: 0;
+    filter: alpha(opacity=45);
+    transition: opacity .3s linear,height 0s ease .3s;
+}
+
+.wd-drawer.wd-drawer-open .wd-drawer-mask {
+    height: 100%;
+    opacity: 1;
+    transition: none;
+    -webkit-animation: antdDrawerFadeIn .3s cubic-bezier(.7,.3,.1,1);
+    animation: antdDrawerFadeIn .3s cubic-bezier(.7,.3,.1,1);
+}
+
+.wd-drawer-right.wd-drawer-open .wd-drawer-content-wrapper {
+    box-shadow: -2px 0 8px rgba(0,0,0,.15);
+}
+
+.wd-notification-list {
+    padding: 0;
+    margin: 0;
+}
+
+.wd-notification-item {
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.wd-notification-item.unread {
+    border-left: 4px solid #21a5e4;
+    background: #f7fdff;
+}
+
+.wd-notification-item:hover {
+    background: #f8f8f8;
+}
+
+.wd-notification-item a {
+    display: flex;
+    flex-wrap: nowrap;
+    text-decoration: none;
+    color: #333;
+    padding: 0 10px;
+}
+
+.wd-notification-item .notif-icon {
+    margin-right: 12px;
+    margin-top: 4px;
+}
+
+.wd-notification-item .notif-icon img {
+    max-width: 32px;
+    border-radius: 50%;
+}
+
+.notif-date {
+    color: #999;
+    margin-top: 3px;
+    font-size: .9em;
+}
+
+.notif-actions {
+    margin-left: auto;
+    padding-left: 7px;
+}
+
+.notif-actions .dashicons {
+    font-size: 10px;
+    visibility: hidden;
+}
+
+.wd-notification-item a:hover .notif-actions .dashicons {
+    /*visibility: visible;*/
+}
