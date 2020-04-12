@@ -2,9 +2,11 @@
 
 A notification center implementation for WordPress. Use this plugin to send user notification (visible only on the dashboard).
 
+Quick links: [Using](#using) | [Installing](#installing)
+
 ![Notification Center](http://tareq.in/ojSYXK+)
 
-## Usage
+## Using
 
 From your plugin, you can send notifications to a user like this:
 
@@ -26,6 +28,15 @@ wd_notify()->to( $receiver_id )
     ->from_plugin( $plugin_basename )
     ->link( 'https://example.com/wp-admin/plugins.php' )
     ->send();
+```
+
+## Installing
+
+Clone into your plugins folder and run `composer install`
+
+```
+git clone git@github.com:tareq1988/wp-notification-center.git
+composer install
 ```
 
 ### Author
