@@ -66,7 +66,7 @@ function wd_notify_get_notifications( $args = [] ) {
     $where = $args['since'] ? sprintf( 'AND UNIX_TIMESTAMP(sent_at) > %d', $args['since'] ) : '';
 
     $query = $wpdb->prepare(
-        "SELECT * FROM {$wpdb->prefix}wd_notifications
+        "SELECT *, UNIX_TIMESTAMP(sent_at) as sent_timestamp FROM {$wpdb->prefix}wd_notifications
         WHERE `to` = %d $where
         ORDER BY sent_at DESC
         LIMIT %d, %d",

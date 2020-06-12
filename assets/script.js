@@ -54,7 +54,7 @@
 
     setLastFetched: function(response) {
       if (response.length) {
-        lastFetched = Math.round((new Date(response[0].date)).getTime() / 1000);
+        lastFetched = response[0].timestamp;
       }
     },
 

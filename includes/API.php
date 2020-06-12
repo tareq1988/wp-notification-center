@@ -215,7 +215,8 @@ class API extends WP_REST_Controller {
         }
 
         if ( in_array( 'date', $fields, true ) ) {
-            $data['date'] = mysql_to_rfc3339( $notification->sent_at );
+            $data['date']      = mysql_to_rfc3339( $notification->sent_at );
+            $data['timestamp'] = (int) $notification->sent_timestamp;
         }
 
         $response = rest_ensure_response( $data );

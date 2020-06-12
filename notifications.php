@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Notification Center
+ * Plugin Name: Notification Center by weDevs
  * Description: Notification center plugin for WordPress
  * Plugin URI: https://wedevs.com
  * Author: Tareq Hasan
