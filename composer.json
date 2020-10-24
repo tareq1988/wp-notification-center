@@ -2,7 +2,7 @@
     "name": "tareq1988/wedevs-notification",
     "description": "A notification center plugin for WordPress",
     "type": "wordpress-plugin",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Tareq Hasan",
@@ -16,5 +16,20 @@
             "WeDevs\\Notification\\": "includes/"
         },
         "files": [ "includes/functions.php" ]
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "dev-master",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3",
+        "tareq1988/wp-php-cs-fixer": "dev-master",
+        "phpcompatibility/phpcompatibility-wp": "dev-master",
+        "phpunit/phpunit": "7.5.9"
+    },
+    "scripts": {
+      "phpcs": [
+        "phpcs -p -s"
+      ],
+      "phpcbf": [
+        "phpcbf -p"
+      ]
     }
 }
