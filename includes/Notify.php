@@ -90,13 +90,13 @@ class Notify {
         $content = trim( $content );
 
         if ( empty( $content ) ) {
-            throw new Exception( __( 'Empty notification body given', 'textdomain' ) );
+            throw new Exception( __( 'Empty notification body given', 'admin-notification-center' ) );
         }
 
         $length_func = function_exists( 'mb_strlen' ) ? 'mb_strlen' : 'strlen';
 
         if ( $length_func( $content ) > self::LENGTH ) {
-            throw new Exception( __( 'Notification body exceeds maximum allowed length.', 'textdomain' ) );
+            throw new Exception( __( 'Notification body exceeds maximum allowed length.', 'admin-notification-center' ) );
         }
 
         $content = wp_kses( $content, [ 'strong' => [] ] );
@@ -117,7 +117,7 @@ class Notify {
         $this->type = 'PLUGIN';
 
         if ( ! is_plugin_active( $basename ) ) {
-            throw new Exception( __( 'The plugin is not active', 'textdomain' ) );
+            throw new Exception( __( 'The plugin is not active', 'admin-notification-center' ) );
         }
 
         $plugins = get_plugins();

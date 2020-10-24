@@ -7,11 +7,11 @@
             <div class="wd-drawer-wrapper-body">
                 <div class="wd-drawer-header">
                     <div class="wd-drawer-title">
-                        <?php _e( 'Notifications', 'notification-center' ); ?>
+                        <?php _e( 'Notifications', 'admin-notification-center' ); ?>
                         <a href="#" class=""><span class="dashicons dashicons-update"></span></a>
                     </div>
                     <div class="wd-drawer-read">
-                        <a href="#" id="wd-notification-mark-all-read"><?php _e( 'Mark all as read', 'notification-center' ); ?></a>
+                        <a href="#" id="wd-notification-mark-all-read"><?php _e( 'Mark all as read', 'admin-notification-center' ); ?></a>
                     </div>
                 </div>
                 <div class="wd-drawer-body">
@@ -42,7 +42,7 @@
         <# } ) #>
     <# } else { #>
         <li>
-            <?php _e( 'No notification found.', 'notification-center' ); ?>
+            <?php _e( 'No notification found.', 'admin-notification-center' ); ?>
         </li>
     <# } #>
 </script>
