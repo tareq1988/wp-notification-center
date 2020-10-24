@@ -9,7 +9,7 @@ function wd_notify() {
     $backtrace = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, 3 );
 
     if ( ! wd_notify_from_plugin( $backtrace ) ) {
-        return;
+        throw new \Exception( __( 'Notifications are only allowed from a plugin', 'wd-notification-center' ) );
     }
 
     $slug = wd_notify_get_caller_slug( $backtrace );

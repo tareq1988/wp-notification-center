@@ -8,15 +8,15 @@
     lastFetched = null,
     hasBell = false;
 
-  var Notification = {
+  var Notify = {
     toggleDrawer: function() {
       if (drawer.hasClass('wd-drawer-open')) {
-        Notification.closeDrawer();
+        Notify.closeDrawer();
       } else {
-        Notification.openDrawer();
+        Notify.openDrawer();
 
         if (hasBell) {
-          Notification.dismissBell();
+          Notify.dismissBell();
         }
       }
     },
@@ -35,10 +35,10 @@
     },
 
     dismissBell: function() {
-      Notification.post('dismiss', {})
+      Notify.post('dismiss', {})
         .done(function() {
           hasBell = true;
-          Notification.removeBell();
+          Notify.removeBell();
         });
     },
 
@@ -70,15 +70,14 @@
       var param = wdNotify.root.includes('rest_route') ? '&' : '?';
       var query = ( lastFetched !== null ) ? param + 'since=' + lastFetched : '';
 
-      Notification.fetchAnimationStart();
+      Notify.fetchAnimationStart();
 
       $.get({
         url: wdNotify.root + 'wd-notifications/v1/notifications' + query,
         headers: { 'X-WP-Nonce': wdNotify.nonce }
       })
       .done(function(response, status, xhr) {
-        Notification.fetchAnimationStop();
-        Notification.setLastFetched(response);
+        Notify.fetchAnimationStop();
 
         if (response.length) {
           if (hasNotification) {
@@ -90,14 +89,24 @@
           var alert = xhr.getResponseHeader('x-wp-notification');
 
           if (alert === 'yes') {
-            Notification.addBellIcon();
+            Notify.addBellIcon();
             hasBell = true;
+
+            // only show notifications if it came in real-time
+            // Skip the first fetch
+            if (lastFetched !== null) {
+              response.forEach(function(item) {
+                Notify.showBrowserNotification(item);
+              });
+            }
           }
         }
 
         if (!hasNotification && response.length) {
           hasNotification = true;
         }
+
+        Notify.setLastFetched(response);
       });
     },
 
@@ -109,7 +118,7 @@
       lastFetched = null;
       hasNotification = false;
 
-      Notification.fetch();
+      Notify.fetch();
     },
 
     markRead: function(e) {
@@ -118,7 +127,7 @@
       var self = $(this),
         id = self.data('id');
 
-      Notification.post(id, { status: 'read' })
+      Notify.post(id, { status: 'read' })
         .done(function(response) {
           self.closest('.wd-notification-item').removeClass('unread').addClass('read');
 
@@ -131,12 +140,36 @@
     markAllRead: function(e) {
       e.preventDefault();
 
-      Notification.post('read', {})
+      Notify.post('read', {})
         .done(function(response) {
           list.find('li.unread').each(function(i, item) {
             $(item).removeClass('unread').addClass('read');
           });
         });
+    },
+
+    showBrowserNotification: function(item) {
+      if (!('Notification' in window)) {
+        console.log('This browser does not support desktop notification');
+        return;
+      }
+
+      if (Notification.permission !== 'granted') {
+        console.log("We don't have notification permission");
+        return;
+      }
+
+      const notification = new Notification(item.origin, {
+        body: item.content,
+        icon: item.icon,
+        timestamp: item.timestamp,
+      })
+
+      if (item.link) {
+        notification.onclick = function(e) {
+          window.location.href = item.link;
+        }
+      }
     },
 
     addBellIcon: function() {
@@ -150,19 +183,19 @@
 
   $(function() {
 
-    bell.click(Notification.toggleDrawer);
+    bell.click(Notify.toggleDrawer);
 
-    drawer.on('click', '.wd-drawer-mask', Notification.closeDrawer);
-    drawer.on('click', '.wd-drawer-read a', Notification.markAllRead);
-    drawer.on('click', '.wd-drawer-title a', Notification.refresh);
+    drawer.on('click', '.wd-drawer-mask', Notify.closeDrawer);
+    drawer.on('click', '.wd-drawer-read a', Notify.markAllRead);
+    drawer.on('click', '.wd-drawer-title a', Notify.refresh);
 
-    list.on('click', '.wd-notification-item.unread a', Notification.markRead);
+    list.on('click', '.wd-notification-item.unread a', Notify.markRead);
 
-    // initial fetch after 200ms
-    setTimeout(Notification.fetch, 500);
+    // initial fetch after 500ms
+    setTimeout(Notify.fetch, 500);
 
     // periodically fetch on a set duration
-    setInterval(Notification.fetch, wdNotify.duration)
+    setInterval(Notify.fetch, wdNotify.duration)
   });
 
 })(jQuery);

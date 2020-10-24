@@ -153,7 +153,7 @@ class Notify {
         $this->sent_by = (int) $user_id;
         $this->type = 'USER';
 
-        $avatar = get_avatar_url( $user_id, [ 'size' => 32 ] );
+        $avatar = get_avatar_url( $user_id, [ 'size' => 64 ] );
 
         if ( $avatar ) {
             $this->icon = $avatar;

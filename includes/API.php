@@ -202,6 +202,10 @@ class API extends WP_REST_Controller {
             $data['content'] = $notification->body;
         }
 
+        if ( in_array( 'origin', $fields, true ) ) {
+            $data['origin'] = $notification->origin;
+        }
+
         if ( in_array( 'link', $fields, true ) ) {
             $data['link'] = $notification->link;
         }
@@ -351,6 +355,11 @@ class API extends WP_REST_Controller {
                     'description' => __( 'URL to the object.' ),
                     'type'        => 'string',
                     'format'      => 'uri',
+                    'context'     => [ 'view', 'edit' ],
+                ],
+                'origin' => [
+                    'description' => __( 'Plugin that originated the notification.' ),
+                    'type'        => 'string',
                     'context'     => [ 'view', 'edit' ],
                 ],
                 'read' => [
