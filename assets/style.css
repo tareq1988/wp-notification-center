@@ -17,10 +17,10 @@
 #wpadminbar #wp-admin-bar-wd-notify-center .ab-icon.has-alert:before {
     content: ' ';
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     top: 8px;
-    right: -5px;
+    right: -8px;
     background: #f5222d;
     border-radius: 100%;
 }

@@ -14,7 +14,7 @@ class Assets {
     public function enqueue_assets() {
         wp_register_style( 'wd-notify-style', WD_NOTIF_ASSETS . '/style.css', false, filemtime( WD_NOTIF_PATH . '/assets/style.css' ) );
 
-        $fetch_duration = apply_filters( 'wd_notification_internal', 10 );
+        $fetch_duration = apply_filters( 'wd_notification_internal', 30 );
         wp_register_script( 'wd-notify-js', WD_NOTIF_ASSETS . '/script.js', [ 'jquery', 'wp-util' ], filemtime( WD_NOTIF_PATH . '/assets/script.js' ), true );
         wp_localize_script( 'wd-notify-js', 'wdNotify', [
             'root'  => esc_url_raw( rest_url() ),

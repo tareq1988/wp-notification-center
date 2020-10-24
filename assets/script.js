@@ -159,7 +159,7 @@
     list.on('click', '.wd-notification-item.unread a', Notification.markRead);
 
     // initial fetch after 200ms
-    setTimeout(Notification.fetch, 200);
+    setTimeout(Notification.fetch, 500);
 
     // periodically fetch on a set duration
     setInterval(Notification.fetch, wdNotify.duration)
