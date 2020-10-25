@@ -94,7 +94,7 @@
 
             // only show notifications if it came in real-time
             // Skip the first fetch
-            if (lastFetched !== null) {
+            if (lastFetched !== null && Notify.canShowBrowserNotification()) {
               response.forEach(function(item) {
                 Notify.showBrowserNotification(item);
               });
@@ -148,17 +148,21 @@
         });
     },
 
-    showBrowserNotification: function(item) {
+    canShowBrowserNotification: function() {
       if (!('Notification' in window)) {
         console.log('This browser does not support desktop notification');
-        return;
+        return false;
       }
 
       if (Notification.permission !== 'granted') {
         console.log("We don't have notification permission");
-        return;
+        return false;
       }
 
+      return true;
+    },
+
+    showBrowserNotification: function(item) {
       const notification = new Notification(item.origin, {
         body: item.content,
         icon: item.icon,
