@@ -161,7 +161,10 @@ class API extends WP_REST_Controller {
             $args[ $param_key ] = isset( $request[ $key ] ) ? $request[ $key ] : $value['default'];
         }
 
-        $notifications = wd_notify_get_notifications( $args );
+        
+        $limit          = ! empty( $args['limit'] ) ? $args['limit'] : 20;
+        $args['offset'] = empty( $args['page'] ) ? 0 : ( $args['page'] - 1 ) * $limit;
+        $notifications  = wd_notify_get_notifications( $args );
 
         if ( empty( $notifications ) ) {
             return rest_ensure_response( $data );
